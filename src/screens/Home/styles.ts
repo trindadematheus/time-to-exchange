@@ -57,3 +57,25 @@ export const SubtitleItemLabel = styled.Text`
   line-height: 17px;
   color: ${theme.colors.light_200};
 `
+
+export const WithoutScheduleArea = styled.View`
+  background-color: ${theme.colors.dark_900};
+  padding: 20px;
+
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`
+
+export const WithoutScheduleAreaTitle = styled.Text`
+  font-weight: bold;
+  font-size: 22px;
+  color: ${theme.colors.light_100};
+`
+
+export const WithoutScheduleAreaDesc = styled.Text`
+  font-size: 16px;
+  color: ${theme.colors.light_200};
+  max-width: 60%;
+  text-align: center;
+`

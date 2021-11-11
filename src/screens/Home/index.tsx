@@ -4,6 +4,16 @@ import CoinItem from '../../components/CoinItem'
 import * as S from './styles'
 
 export default function HomeScreen() {
+
+  if (true) {
+    return (
+      <S.WithoutScheduleArea>
+        <S.WithoutScheduleAreaTitle>no schedule registered</S.WithoutScheduleAreaTitle>
+        <S.WithoutScheduleAreaDesc>create a schedule on 'New Schedule' section</S.WithoutScheduleAreaDesc>
+      </S.WithoutScheduleArea>
+    )
+  }
+
   return (
     <>
       <S.Header>
@@ -21,10 +31,10 @@ export default function HomeScreen() {
             <S.SubtitleItemLabel>expected value</S.SubtitleItemLabel>
           </S.SubtitleItem>
         </S.Subtitle> */}
-
+        {/* 
         <CoinItem />
         <CoinItem />
-        <CoinItem />
+        <CoinItem /> */}
       </S.Container>
     </>
   )

@@ -1,8 +1,8 @@
-import styled from "styled-components/native";
+import styled, { css } from "styled-components/native";
 
 import theme from "../../styles/theme";
 
-export const Container = styled.View`
+export const Container = styled.ScrollView`
   background-color: ${theme.colors.dark_900};
   padding: 20px;
 
@@ -22,7 +22,11 @@ export const Options = styled.View`
   justify-content: space-between;
 `
 
-export const OptionItem = styled.TouchableOpacity`
+type OptionItemProps = {
+  isActive: boolean;
+}
+
+export const OptionItem = styled.TouchableOpacity<OptionItemProps>`
   background-color: ${theme.colors.dark_700};
   padding: 14px;
   border-radius: 12px;
@@ -30,11 +34,20 @@ export const OptionItem = styled.TouchableOpacity`
   flex: 1;
   justify-content: center;
   align-items: center;
+
+  ${props => props.isActive && css`
+    background: rgba(213, 143, 1, 0.1);
+  `}
 `
 
-export const OptionItemText = styled.Text`
+export const OptionItemText = styled.Text<OptionItemProps>`
   font-size: 14px;
   color: ${theme.colors.light_200};
+
+  ${props => props.isActive && css`
+    color: ${theme.colors.primary_500};
+    font-weight: bold;
+  `}
 `
 
 export const CoinItem = styled.TouchableOpacity`
@@ -49,8 +62,8 @@ export const CoinItemInfo = styled.View`
   align-items: center;
 `
 
-export const CoinItemImage = styled.View`
-  background-color: ${theme.colors.light_200};
+export const CoinItemImage = styled.Image`
+  background-color: ${theme.colors.dark_900};
   border-radius: 30px;
   width: 30px;
   height: 30px;
@@ -67,6 +80,7 @@ export const TextInput = styled.TextInput`
   margin-top: 40px;
   border-radius: 12px;
   color: ${theme.colors.light_100};
+  border: 1px solid #333;
   padding: 14px 20px;
   font-weight: bold;
 `
@@ -89,4 +103,34 @@ export const ConfirmButtonText = styled.Text`
   font-weight: bold;
   font-size: 16px;
   color: ${theme.colors.dark_700};
+`
+
+export const ModalContainer = styled.View`
+  background-color: ${theme.colors.dark_900};
+  padding: 20px;
+
+  flex: 1;
+`
+
+export const ModalHeader = styled.View`
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+`
+
+export const ModalHeaderTitle = styled.Text`
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 28px;
+  color: ${theme.colors.light_100};
+`
+
+export const ModalHeaderClose = styled.TouchableOpacity`
+  background-color: ${theme.colors.dark_700};
+  height: 40px;
+  width: 40px;
+  border-radius: 40px;
+
+  justify-content: center;
+  align-items: center;
 `

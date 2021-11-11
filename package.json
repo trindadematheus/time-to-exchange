@@ -14,8 +14,10 @@
     "@react-navigation/native": "^6.0.6",
     "@react-navigation/native-stack": "^6.2.5",
     "@types/styled-components-react-native": "^5.1.2",
+    "axios": "^0.24.0",
     "react": "17.0.2",
     "react-native": "0.66.2",
+    "react-native-masked-text": "^1.13.0",
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.9.0",
     "styled-components": "^5.3.3"
