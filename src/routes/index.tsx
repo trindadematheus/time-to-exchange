@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import { DarkTheme, NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -7,13 +7,14 @@ import HomeScreen from '../screens/Home';
 import theme from '../styles/theme';
 import NewScheduleScreen from '../screens/NewSchedule';
 import SettingsScreen from '../screens/Settings';
+import CoinDetailScreen from '../screens/CoinDetail';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 export default function Routes() {
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={DarkTheme} >
       <Tab.Navigator
         screenOptions={{
           headerStyle: {
@@ -38,8 +39,8 @@ export default function Routes() {
         }}
       >
         <Tab.Screen
-          name="HomeScreen"
-          component={HomeScreen}
+          name="HomeRoutes"
+          component={HomeRoutes}
           options={{
             headerShown: false,
             tabBarLabel: 'Home'
@@ -63,5 +64,26 @@ export default function Routes() {
         />
       </Tab.Navigator>
     </NavigationContainer>
+  );
+}
+
+function HomeRoutes() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="HomeScreen"
+        component={HomeScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="CoinDetailScreen"
+        component={CoinDetailScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+    </Stack.Navigator>
   );
 }

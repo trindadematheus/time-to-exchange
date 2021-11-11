@@ -1,13 +1,16 @@
+import { useNavigation } from '@react-navigation/core'
 import React from 'react'
 import { View } from 'react-native'
-import theme from '../../styles/theme'
 
+import theme from '../../styles/theme'
 import * as S from './styles'
 
 export default function CoinItem() {
+  const navigation: any = useNavigation()
+
   return (
     <>
-      <S.Container>
+      <S.Container onPress={() => navigation.navigate('CoinDetailScreen')} >
         <S.Left>
           <S.Image />
           <View>
