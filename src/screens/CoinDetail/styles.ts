@@ -1,23 +1,54 @@
-import styled from "styled-components/native";
+import styled, { css } from "styled-components/native";
 
 import theme from "../../styles/theme";
 
-export const Container = styled.View`
+export const Container = styled.ScrollView`
   background-color: ${theme.colors.dark_900};
   padding: 20px;
 
   flex: 1;
 `
 
-export const Header = styled.View`
-  height: 200px;
+export const Row = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`
+
+export const Menu = styled.View`
+  background-color: ${theme.colors.dark_900};
+  padding: 20px;
+  padding-bottom: 0px;
+
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`
+
+export const MenuRight = styled.View`
+  flex-direction: row;
+  align-items: center;
+`
+
+export const MenuButton = styled.TouchableOpacity`
+  background-color: ${theme.colors.dark_700};
+  height: 40px;
+  width: 40px;
+  border-radius: 40px;
 
   justify-content: center;
   align-items: center;
 `
 
-export const Image = styled.View`
-  background-color: red;
+export const Header = styled.View`
+  height: 180px;
+
+  justify-content: center;
+  align-items: center;
+`
+
+export const Image = styled.Image`
+  background-color: ${theme.colors.dark_900};
   height: 70px;
   width: 70px;
   border-radius: 70px;
@@ -61,10 +92,21 @@ export const PriceValue = styled.Text`
   margin-right: 4px;
 `
 
-export const PricePercent = styled.Text`
+type PricePercentProps = {
+  isNegative: boolean;
+}
+
+export const PricePercent = styled.Text<PricePercentProps>`
   font-size: 16px;
-  color: red;
   margin-right: 4px;
+
+  ${props => props.isNegative && css`
+    color: red;
+  `}
+
+  ${props => !props.isNegative && css`
+    color: green;
+  `}
 `
 
 export const PriceIndicator = styled.Text`

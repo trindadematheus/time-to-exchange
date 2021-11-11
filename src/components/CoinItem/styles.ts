@@ -14,8 +14,8 @@ export const Left = styled.View`
   align-items: center;
 `
 
-export const Image = styled.View`
-  background-color: red;
+export const Image = styled.Image`
+  background-color: ${theme.colors.dark_900};
   border-radius: 40px;
   width: 40px;
   height: 40px;

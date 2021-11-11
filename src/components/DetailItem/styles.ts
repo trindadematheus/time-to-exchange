@@ -1,4 +1,4 @@
-import styled from "styled-components/native";
+import styled, { css } from "styled-components/native";
 
 import theme from "../../styles/theme";
 
@@ -12,23 +12,19 @@ export const Container = styled.View`
   align-items: center;
 `
 
-export const Icon = styled.View`
-  background-color: red;
-  border-radius: 40px;
-  height: 40px;
-  width: 40px;
-  margin-right: 10px;
-`
-
 export const Title = styled.Text`
   font-size: 14px;
   line-height: 16px;
   color: ${theme.colors.light_200};
 `
 
-export const Value = styled.Text`
+type ValueProps = {
+  color: string;
+}
+
+export const Value = styled.Text<ValueProps>`
   font-weight: bold;
   font-size: 18px;
   line-height: 21px;
-  color: ${theme.colors.light_100};
+  color: ${props => props.color};
 `

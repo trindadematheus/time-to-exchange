@@ -2,6 +2,7 @@ import * as React from 'react';
 import { DarkTheme, NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Feather from 'react-native-vector-icons/Feather'
 
 import HomeScreen from '../screens/Home';
 import theme from '../styles/theme';
@@ -43,7 +44,8 @@ export default function Routes() {
           component={HomeRoutes}
           options={{
             headerShown: false,
-            tabBarLabel: 'Home'
+            tabBarLabel: 'Home',
+            tabBarIcon: ({ color }) => <Feather name="home" size={18} color={color} />
           }}
         />
         <Tab.Screen
@@ -51,7 +53,8 @@ export default function Routes() {
           component={NewScheduleScreen}
           options={{
             tabBarLabel: 'New Schedule',
-            title: 'New Schedule'
+            title: 'New Schedule',
+            tabBarIcon: ({ color }) => <Feather name="check-square" size={18} color={color} />
           }}
         />
         <Tab.Screen
@@ -59,7 +62,8 @@ export default function Routes() {
           component={SettingsScreen}
           options={{
             tabBarLabel: 'Settings',
-            title: 'Settings'
+            title: 'Settings',
+            tabBarIcon: ({ color }) => <Feather name="settings" size={18} color={color} />
           }}
         />
       </Tab.Navigator>

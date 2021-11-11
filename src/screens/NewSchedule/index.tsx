@@ -1,12 +1,15 @@
+import { useDatabase } from '@nozbe/watermelondb/hooks'
+import { useIsFocused, useNavigation } from '@react-navigation/core'
 import React, { useEffect, useState } from 'react'
-import { FlatList, KeyboardAvoidingView, Modal, Platform, TouchableOpacity, View } from 'react-native'
-import { MaskService } from 'react-native-masked-text'
+import { FlatList, KeyboardAvoidingView, Modal, TouchableOpacity, View } from 'react-native'
+import Toast from 'react-native-toast-message'
 
 import CoinSelectItem from '../../components/CoinSelectItem'
 import LoadingScreen from '../../components/Loading'
 import { getCoins } from '../../services/coins'
 import { CoinTicker } from '../../types/coin-ticker'
 import coinLogo from '../../utils/coinLogo'
+import maskMoney from '../../utils/maskMoney'
 
 import * as S from './styles'
 
@@ -22,15 +25,20 @@ export default function NewScheduleScreen() {
   const [value, setValue] = useState('0')
   const [coinName, setCoinName] = useState('')
 
+  const db = useDatabase()
+  const isFocused = useIsFocused()
+  const navigation: any = useNavigation()
+
   useEffect(() => {
-    setValue(handleMaskMoney('0'))
+    setLoadingScreen(true)
+    setValue(maskMoney('0', '$', ',', '.'))
     setSelectedCoin(null)
     setCondition('none')
     setModality('none')
     setCoins([])
 
     handleGetCoins()
-  }, [])
+  }, [isFocused])
 
   async function handleGetCoins() {
     setLoadingScreen(true)
@@ -41,7 +49,10 @@ export default function NewScheduleScreen() {
       setCoins(data)
       setFiltredCoins(data)
     } catch (error: any) {
-      console.log({ error })
+      Toast.show({
+        type: 'error',
+        text1: 'An error was ocurred'
+      });
     } finally {
       setLoadingScreen(false)
     }
@@ -52,16 +63,41 @@ export default function NewScheduleScreen() {
     setShowModalCoin(false)
   }
 
-  function handleMaskMoney(txt: string) {
-    return MaskService.toMask('money', txt, {
-      unit: '$',
-      separator: '.',
-      delimiter: ','
-    })
-  }
+  async function handleCreateSchedule() {
+    if (!selectedCoin) return;
 
-  function handleCreateSchedule() {
-    console.log('continue')
+    setLoadingScreen(true)
+
+    const storagedSchedules: any[] = await db.get('coin_schedules').query().fetch()
+
+    if (storagedSchedules.length === 3) {
+      Toast.show({
+        type: 'error',
+        text1: 'you have reached the schedule limit'
+      });
+
+      return;
+    }
+
+    await db.write(async () => {
+      return await db.get('coin_schedules').create((schedule: any) => {
+        schedule.coin_id = selectedCoin.id
+        schedule.coin_symbol = selectedCoin.symbol
+        schedule.coin_name = selectedCoin.name
+        schedule.condition = condition
+        schedule.modality = modality
+        schedule.value = value
+      })
+    })
+
+    Toast.show({
+      type: 'success',
+      text1: 'schedule registered with success'
+    });
+
+    navigation.navigate('HomeRoutes', {
+      screen: 'HomeScreen'
+    })
   }
 
   function handleFilterCoinList(txt: string) {
@@ -117,7 +153,7 @@ export default function NewScheduleScreen() {
           <S.TextInput
             keyboardType="numeric"
             value={value}
-            onChangeText={txt => setValue(handleMaskMoney(txt))}
+            onChangeText={txt => setValue(maskMoney(txt, '$', ',', '.'))}
           />
         </S.Container>
 

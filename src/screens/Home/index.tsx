@@ -1,11 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDatabase } from '@nozbe/watermelondb/hooks';
 
 import CoinItem from '../../components/CoinItem'
 import * as S from './styles'
+import { CoinScheduled } from '../../types/coin-scheduled';
+import { useIsFocused } from '@react-navigation/core';
 
 export default function HomeScreen() {
+  const [schedules, setSchedules] = useState<any[]>([])
 
-  if (true) {
+  const db = useDatabase()
+  const isFocused = useIsFocused()
+
+  useEffect(() => {
+    handleGetSchedules();
+  }, [isFocused])
+
+  async function handleGetSchedules() {
+    const storagedSchedules: any[] = await db.get('coin_schedules').query().fetch()
+
+    setSchedules(storagedSchedules)
+  }
+
+  if (schedules.length === 0) {
     return (
       <S.WithoutScheduleArea>
         <S.WithoutScheduleAreaTitle>no schedule registered</S.WithoutScheduleAreaTitle>
@@ -31,10 +48,8 @@ export default function HomeScreen() {
             <S.SubtitleItemLabel>expected value</S.SubtitleItemLabel>
           </S.SubtitleItem>
         </S.Subtitle> */}
-        {/* 
-        <CoinItem />
-        <CoinItem />
-        <CoinItem /> */}
+
+        {schedules.map((schedule, key) => <CoinItem key={key} coin={schedule._raw} />)}
       </S.Container>
     </>
   )
