@@ -9,8 +9,8 @@ export const Container = styled.ScrollView`
   flex: 1;
 `
 
-export const Header = styled.View`
-  background-color: ${theme.colors.dark_700};
+export const Header = styled.ImageBackground`
+  background-color: ${theme.colors.dark_900};
   height: 200px;
 
   justify-content: center;

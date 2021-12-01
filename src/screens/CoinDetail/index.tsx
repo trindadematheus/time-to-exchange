@@ -10,6 +10,7 @@ import LoadingScreen from '../../components/Loading';
 import { getCoinById } from '../../services/coins';
 import { CoinTicker } from '../../types/coin-ticker';
 import coinLogo from '../../utils/coinLogo';
+import bgImage from '../../assets/bg.png'
 import maskMoney from '../../utils/maskMoney';
 
 import * as S from './styles'
@@ -62,32 +63,33 @@ export default function CoinDetailScreen({ route }: any) {
 
   return (
     <>
-      <S.Menu>
-        <S.MenuButton onPress={() => navigation.goBack()} >
-          <Feather name="chevron-left" color="white" size={18} />
-        </S.MenuButton>
-
-        <S.MenuRight>
-          <S.MenuButton style={{ marginRight: 10 }} >
-            <Feather name="share" color="white" size={18} />
+      <S.Header source={bgImage} >
+        <S.Menu>
+          <S.MenuButton onPress={() => navigation.goBack()} >
+            <Feather name="chevron-left" color="white" size={18} />
           </S.MenuButton>
-          <S.MenuButton onPress={handleRemoveSchedule} >
-            <Feather name="trash" color="red" size={18} />
-          </S.MenuButton>
-        </S.MenuRight>
-      </S.Menu>
 
-      <S.Container>
-        <S.Header>
+          <S.MenuRight>
+            <S.MenuButton style={{ marginRight: 10 }} >
+              <Feather name="share" color="white" size={18} />
+            </S.MenuButton>
+            <S.MenuButton onPress={handleRemoveSchedule} >
+              <Feather name="trash" color="red" size={18} />
+            </S.MenuButton>
+          </S.MenuRight>
+        </S.Menu>
+
+        <S.HeaderData>
           <S.Image source={{ uri: coinLogo(coinData.symbol) }} />
           <S.Name>{coinData.name}</S.Name>
           <S.Initial>{coinData.symbol}</S.Initial>
-        </S.Header>
-
+        </S.HeaderData>
+      </S.Header>
+      <S.Container>
         <S.Price>
           <S.PriceLabel>Price USD</S.PriceLabel>
           <S.PriceValueArea>
-            <S.PriceValue>{maskMoney(coinData.price_usd, '$', ',', '.')}</S.PriceValue>
+            <S.PriceValue>{maskMoney(parseFloat(coinData.price_usd).toFixed(2), '$', ',', '.')}</S.PriceValue>
             <S.PricePercent isNegative={coinData.percent_change_1h.includes('-')} >{coinData.percent_change_1h}%</S.PricePercent>
           </S.PriceValueArea>
           <S.PriceIndicator>last 1h</S.PriceIndicator>

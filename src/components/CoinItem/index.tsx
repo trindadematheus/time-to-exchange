@@ -5,6 +5,7 @@ import { View } from 'react-native'
 import theme from '../../styles/theme'
 import { CoinScheduled } from '../../types/coin-scheduled'
 import coinLogo from '../../utils/coinLogo'
+import maskMoney from '../../utils/maskMoney'
 import * as S from './styles'
 
 type CoinItemProps = {
@@ -31,7 +32,7 @@ export default function CoinItem({ coin }: CoinItemProps) {
               <S.Price
                 style={{ color: '#FFE600', marginRight: 10 }}
               >
-                {coin.value}
+                {maskMoney(parseFloat(coin.value).toFixed(2), '$', ",", '.')}
               </S.Price>
             </S.Prices>
           </View>

@@ -11,7 +11,7 @@ export default appSchema({
         { name: 'coin_name', type: 'string' },
         { name: 'condition', type: 'string' },
         { name: 'modality', type: 'string' },
-        { name: 'value', type: 'number' },
+        { name: 'value', type: 'string' },
       ]
     }),
   ]

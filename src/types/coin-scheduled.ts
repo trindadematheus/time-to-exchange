@@ -4,5 +4,5 @@ export type CoinScheduled = {
   'coin_name': string
   'condition': string
   'modality': string
-  'value': number
+  'value': string
 }

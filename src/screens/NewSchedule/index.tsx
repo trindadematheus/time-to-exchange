@@ -86,7 +86,7 @@ export default function NewScheduleScreen() {
         schedule.coin_name = selectedCoin.name
         schedule.condition = condition
         schedule.modality = modality
-        schedule.value = value
+        schedule.value = (Number(value.replace(/[^0-9-]+/g, "")) / 100).toFixed(2)
       })
     })
 
@@ -133,7 +133,7 @@ export default function NewScheduleScreen() {
               {selectedCoin && <S.CoinItemImage source={{ uri: coinLogo(selectedCoin.symbol) }} />}
               <S.CoinItemTitle>
                 {selectedCoin
-                  ? `${selectedCoin.symbol} - ${selectedCoin.name} $${selectedCoin.price_usd}`
+                  ? `${selectedCoin.symbol} - ${selectedCoin.name} ${maskMoney(parseFloat(selectedCoin.price_usd).toFixed(2), '$', ',', '.')}`
                   : 'touch to select a coin'
                 }
               </S.CoinItemTitle>
@@ -142,8 +142,8 @@ export default function NewScheduleScreen() {
 
           <S.Title>when its value is</S.Title>
           <S.Options>
-            <S.OptionItem onPress={() => setCondition('greather')} isActive={condition === 'greather'} style={{ marginRight: 14 }} >
-              <S.OptionItemText isActive={condition === 'greather'}>greather than</S.OptionItemText>
+            <S.OptionItem onPress={() => setCondition('greater')} isActive={condition === 'greater'} style={{ marginRight: 14 }} >
+              <S.OptionItemText isActive={condition === 'greater'}>greater than</S.OptionItemText>
             </S.OptionItem>
             <S.OptionItem onPress={() => setCondition('less')} isActive={condition === 'less'}>
               <S.OptionItemText isActive={condition === 'less'}>less than</S.OptionItemText>

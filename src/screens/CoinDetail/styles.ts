@@ -16,9 +16,7 @@ export const Row = styled.View`
 `
 
 export const Menu = styled.View`
-  background-color: ${theme.colors.dark_900};
-  padding: 20px;
-  padding-bottom: 0px;
+  margin-bottom: 10px;
 
   flex-direction: row;
   justify-content: space-between;
@@ -40,10 +38,11 @@ export const MenuButton = styled.TouchableOpacity`
   align-items: center;
 `
 
-export const Header = styled.View`
-  height: 180px;
+export const Header = styled.ImageBackground`
+  padding: 20px;
+`
 
-  justify-content: center;
+export const HeaderData = styled.View`
   align-items: center;
 `
 

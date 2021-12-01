@@ -2,6 +2,7 @@ import React from 'react'
 import { View } from 'react-native'
 import { CoinTicker } from '../../types/coin-ticker'
 import coinLogo from '../../utils/coinLogo'
+import maskMoney from '../../utils/maskMoney'
 
 import * as S from './styles'
 
@@ -19,7 +20,7 @@ export default function CoinSelectItem({ coin }: CoinSelectItemProps) {
           <View>
             <S.Title>{coin.symbol} - {coin.name}</S.Title>
             <S.Price>
-              ${coin.price_usd}
+              {maskMoney(parseFloat(coin.price_usd).toFixed(2), '$', ',', '.')}
             </S.Price>
           </View>
         </S.Left>

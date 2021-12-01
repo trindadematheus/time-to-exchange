@@ -3,7 +3,7 @@ import { useDatabase } from '@nozbe/watermelondb/hooks';
 
 import CoinItem from '../../components/CoinItem'
 import * as S from './styles'
-import { CoinScheduled } from '../../types/coin-scheduled';
+import bgImage from '../../assets/bg.png'
 import { useIsFocused } from '@react-navigation/core';
 
 export default function HomeScreen() {
@@ -33,7 +33,7 @@ export default function HomeScreen() {
 
   return (
     <>
-      <S.Header>
+      <S.Header source={bgImage} >
         <S.AppName>TIME TO EXCHANGE</S.AppName>
       </S.Header>
       <S.Container>

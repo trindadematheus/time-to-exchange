@@ -9,5 +9,5 @@ export default class CoinSchedules extends Model {
   @field('coin_name') coin_name!: string
   @field('condition') condition!: string
   @field('modality') modality!: string
-  @field('value') value!: number
+  @field('value') value!: string
 }
