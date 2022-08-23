@@ -1,5 +1,5 @@
-# time-to-exchange
-🤑  App to schedule notifications for buy/sell any crypto
+# Time to Exchange
+🪙 App to schedule notifications for buy/sell any crypto
 
 <img src="https://raw.githubusercontent.com/trindadematheus/time-to-exchange/master/assets/readme.png" />
 
